@@ -1,7 +1,7 @@
 
 function Home() {
     return <h1>
-        Teste
+        Hello World
     </h1>
 }
 
