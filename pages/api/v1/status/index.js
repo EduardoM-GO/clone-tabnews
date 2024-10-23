@@ -10,7 +10,6 @@ async function status(request, response) {
   const databaseMaxConnectionsValue = databaseMaxConnectionsResult.rows[0].max_connections;
 
   const databaseName = process.env.POSTGRES_DB;
-  console.log(`Banco de dados selecionado: ${databaseName}`)
 
   const databaseOpenedConnectionsResult = await database.query(
     {
