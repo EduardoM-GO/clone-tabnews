@@ -3,12 +3,18 @@ import { join } from "node:path";
 import database from "infra/database.js";
 
 export default async function migrations(request, response) {
+  if (!["GET", "POST"].includes(request.method)) {
+    return response
+      .status(405)
+      .json({
+        error: `Method "${request.method}" not allowed`,
+      })
+      .end();
+  }
+  
+  let dbClient;
   try {
-    if (!["GET", "POST"].includes(request.method)) {
-      return response.status(405).end();
-    }
-
-    const dbClient = await database.getNewClient();
+    dbClient = await database.getNewClient();
 
     const isDryRun = request.method === "GET";
 
